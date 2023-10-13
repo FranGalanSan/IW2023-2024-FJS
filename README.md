@@ -2,6 +2,9 @@
 Proyecto de prueba para IW
 
 #Integrantes
+Samuel Fernández Peinado
+Francisco Galán Sánchez
+José Javier García Torrejón
 
 #subnivel 1
 
