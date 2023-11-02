@@ -1,6 +1,6 @@
 package com.example.application.services;
 
-import com.example.application.data.SamplePerson;
+import com.example.application.data.Person;
 import com.example.application.data.SamplePersonRepository;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -17,11 +17,11 @@ public class SamplePersonService {
         this.repository = repository;
     }
 
-    public Optional<SamplePerson> get(Long id) {
+    public Optional<Person> get(Long id) {
         return repository.findById(id);
     }
 
-    public SamplePerson update(SamplePerson entity) {
+    public Person update(Person entity) {
         return repository.save(entity);
     }
 
@@ -29,11 +29,11 @@ public class SamplePersonService {
         repository.deleteById(id);
     }
 
-    public Page<SamplePerson> list(Pageable pageable) {
+    public Page<Person> list(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public Page<SamplePerson> list(Pageable pageable, Specification<SamplePerson> filter) {
+    public Page<Person> list(Pageable pageable, Specification<Person> filter) {
         return repository.findAll(filter, pageable);
     }
 
