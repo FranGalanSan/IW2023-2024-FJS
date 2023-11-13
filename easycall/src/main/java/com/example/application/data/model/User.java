@@ -1,17 +1,18 @@
-package com.example.application.data;
+package com.example.application.data.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
-public class Person extends AbstractEntity {
+public class User extends AbstractEntity {
 
     @Id
     @GeneratedValue
-    private long id;
+    UUID id;
     private String firstName;
     private String lastName;
     @Email
