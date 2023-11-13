@@ -1,8 +1,9 @@
-package com.example.application.views.helloworld;
+package com.example.application.views.mainview;
 
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -13,12 +14,13 @@ import com.vaadin.flow.router.RouteAlias;
 @PageTitle("Hello World")
 @Route(value = "hello", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
-public class HelloWorldView extends HorizontalLayout {
-
+public class MainView extends HorizontalLayout {
+    private H1 title;
     private TextField name;
     private Button sayHello;
 
-    public HelloWorldView() {
+    public MainView() {
+        title = new H1("EasyCall");
         name = new TextField("Your name");
         sayHello = new Button("Say hello");
         sayHello.addClickListener(e -> {
@@ -28,8 +30,8 @@ public class HelloWorldView extends HorizontalLayout {
 
         setMargin(true);
         setVerticalComponentAlignment(Alignment.END, name, sayHello);
-
-        add(name, sayHello);
+        
+        add(title, name, sayHello);
     }
 
 }

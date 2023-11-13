@@ -19,8 +19,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 
-@PageTitle("Person Form")
-@Route(value = "person-form", layout = MainLayout.class)
+@PageTitle("Registro")
+@Route(value = "registro", layout = MainLayout.class)
 @Uses(Icon.class)
 public class PersonFormView extends Composite<VerticalLayout> {
 
@@ -37,6 +37,7 @@ public class PersonFormView extends Composite<VerticalLayout> {
         HorizontalLayout layoutRow = new HorizontalLayout();
         Button buttonPrimary = new Button();
         Button buttonSecondary = new Button();
+
         getContent().setWidth("100%");
         getContent().getStyle().set("flex-grow", "1");
         getContent().setJustifyContentMode(JustifyContentMode.START);
@@ -47,10 +48,10 @@ public class PersonFormView extends Composite<VerticalLayout> {
         h3.setText("Personal Information");
         h3.setWidth("100%");
         formLayout2Col.setWidth("100%");
-        textField.setLabel("First Name");
-        textField2.setLabel("Last Name");
-        datePicker.setLabel("Birthday");
-        textField3.setLabel("Phone Number");
+        textField.setLabel("Nombre");
+        textField2.setLabel("Apellidos");
+        datePicker.setLabel("Fecha de Nacimiento");
+        textField3.setLabel("Número de telefono");
         emailField.setLabel("Email");
         textField4.setLabel("Occupation");
         layoutRow.addClassName(Gap.MEDIUM);

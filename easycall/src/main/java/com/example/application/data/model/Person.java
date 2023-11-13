@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-public class User extends AbstractEntity {
+public class Person {
 
     @Id
     @GeneratedValue
