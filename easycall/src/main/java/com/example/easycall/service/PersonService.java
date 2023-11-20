@@ -1,7 +1,7 @@
-package com.example.application.data.service;
+package com.example.easycall.data.service;
 
-import com.example.application.data.model.Person;
-import com.example.application.data.repository.PersonRepository;
+import com.example.easycall.model.Person;
+import com.example.easycall.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

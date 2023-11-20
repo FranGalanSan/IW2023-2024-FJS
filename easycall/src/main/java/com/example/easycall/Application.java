@@ -1,6 +1,6 @@
-package com.example.application;
+package com.example.easycall;
 
-import com.example.application.data.repository.PersonRepository;
+import com.example.easycall.repository.PersonRepository;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
 import javax.sql.DataSource;

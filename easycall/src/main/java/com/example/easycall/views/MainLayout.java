@@ -1,8 +1,8 @@
-package com.example.application.views;
+package com.example.easycall.views;
 
-import com.example.application.views.creditcardform.CreditCardFormView;
-import com.example.application.views.mainview.MainView;
-import com.example.application.views.personform.PersonFormView;
+import com.example.easycall.views.creditcardform.CreditCardFormView;
+import com.example.easycall.views.mainview.MainView;
+import com.example.easycall.views.personform.PersonFormView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.Footer;

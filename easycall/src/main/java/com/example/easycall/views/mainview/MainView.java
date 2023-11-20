@@ -1,6 +1,6 @@
-package com.example.application.views.mainview;
+package com.example.easycall.views.mainview;
 
-import com.example.application.views.MainLayout;
+import com.example.easycall.views.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
