@@ -1,17 +1,16 @@
 package com.example.easycall.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class Person {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     UUID id;
     private String firstName;
     private String lastName;
@@ -21,6 +20,9 @@ public class Person {
     private String phone;
     private LocalDate dateOfBirth;
     private String role;
+
+    @OneToMany
+    private List<Contract> contracts;
 
     public String getFirstName() {
         return firstName;
