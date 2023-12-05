@@ -1,4 +1,4 @@
-package org.vaadin.example;
+package com.easycall.project;
 
 import java.io.Serializable;
 
