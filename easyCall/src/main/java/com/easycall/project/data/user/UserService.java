@@ -1,4 +1,4 @@
-package com.easycall.project.user;
+package com.easycall.project.data.user;
 
 import org.springframework.stereotype.Service;
 import java.util.List;

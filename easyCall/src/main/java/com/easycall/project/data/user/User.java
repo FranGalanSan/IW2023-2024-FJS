@@ -1,4 +1,4 @@
-package com.easycall.project.user;
+package com.easycall.project.data.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
