@@ -1,4 +1,4 @@
-package com.easycall.project.employee.domain;
+package com.easycall.project.employee;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;

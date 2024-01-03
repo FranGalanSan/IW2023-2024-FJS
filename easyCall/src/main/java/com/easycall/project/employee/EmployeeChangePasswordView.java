@@ -1,4 +1,4 @@
-package com.easycall.project.employee.views;
+package com.easycall.project.employee;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
@@ -8,8 +8,8 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.easycall.project.employee.domain.Employee;
-import com.easycall.project.employee.services.EmployeeService;
+import com.easycall.project.employee.Employee;
+import com.easycall.project.employee.EmployeeService;
 
 @PageTitle("Employee Change Password")
 @Route(value = "employee-change-password")

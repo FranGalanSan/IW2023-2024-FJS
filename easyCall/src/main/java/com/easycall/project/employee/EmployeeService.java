@@ -1,11 +1,7 @@
-package com.easycall.project.employee.services;
+package com.easycall.project.employee;
 
-import com.easycall.project.employee.domain.Employee;
-import com.easycall.project.employee.repositories.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
 
 import java.util.Optional;
 
@@ -14,7 +10,6 @@ public class EmployeeService {
 
     private final EmployeeRepository repository;
 
-    @Autowired
     public EmployeeService(EmployeeRepository repository) {
         this.repository = repository;
     }
