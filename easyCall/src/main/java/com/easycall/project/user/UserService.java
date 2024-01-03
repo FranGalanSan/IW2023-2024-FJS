@@ -7,11 +7,11 @@ import java.util.List;
 public class UserService {
     public UserRepository userRepository;
 
-    public List<User> getPersons() {
+    public List<User> getUser() {
         return userRepository.findAll();
     }
 
-    public void savePerson(User person) {
+    public void saveUser(User person) {
         userRepository.save(person);
     }
 }
