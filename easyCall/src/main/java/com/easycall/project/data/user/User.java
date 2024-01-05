@@ -15,6 +15,7 @@ public class User {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
     UUID id;
+    private String password;
     @NotEmpty
     private String firstName;
     @NotEmpty
@@ -33,6 +34,10 @@ public class User {
     public void setId(UUID id) {
         this.id = id;
     }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
 
     public String getFirstName() {
         return firstName;
