@@ -2,57 +2,56 @@ package com.easycall.project.employee;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import org.hibernate.annotations.GenericGenerator;
-
-import java.util.UUID;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import java.util.Objects;
 
 @Entity
+@Table(name = "employee")
 public class Employee {
 
-    public enum EmployeeType {
-        FINANCE,
-        COSTUME_SUPPORT,
-        MARKETING
-    }
-
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private UUID id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @NotEmpty
-    @Column(unique = true, nullable = false)
     private String username;
-
     @NotEmpty
     private String password;
-
     @NotEmpty
-    private String password2;
+    private Role rol;
 
-    @NotEmpty
-    private String firstname;
+    public Employee() {}
 
-    @NotEmpty
-    private String lastname;
+    public Employee(String username, String password, Role rol) {
+        this.username = username;
+        this.rol = rol;
+        this.password = password;
+    }
 
-    @NotEmpty
-    private String recoveryask;
+    //public boolean checkPassword(String password) {
+      //return this.password == password;
+    //}
 
-    @NotEmpty
-    private String recoveryanswer;
+    // Getters y Setters
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "employee_type")
-    private EmployeeType employeeType;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(getId(), employee.getId());
+    }
 
-    // Getters and Setters
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -72,51 +71,11 @@ public class Employee {
         this.password = password;
     }
 
-    public String getPassword2() {
-        return password2;
+    public Role getRol() {
+        return rol;
     }
 
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getRecoveryask() {
-        return recoveryask;
-    }
-
-    public void setRecoveryask(String recoveryask) {
-        this.recoveryask = recoveryask;
-    }
-
-    public String getRecoveryanswer() {
-        return recoveryanswer;
-    }
-
-    public void setRecoveryanswer(String recoveryanswer) {
-        this.recoveryanswer = recoveryanswer;
-    }
-
-    public EmployeeType getEmployeeType() {
-        return employeeType;
-    }
-
-    public void setEmployeeType(EmployeeType employeeType) {
-        this.employeeType = employeeType;
+    public void setRol(Role rol) {
+        this.rol = rol;
     }
 }

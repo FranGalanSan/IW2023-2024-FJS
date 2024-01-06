@@ -1,12 +1,15 @@
 package com.easycall.project.employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
+import com.easycall.project.employee.Employee;
 import java.util.Optional;
-import java.util.UUID;
+
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    Optional<Employee> findByUsername(String username);
+    Employee findByUsername(String username);
+
+    Employee getByUsername(String username);
+
 }
