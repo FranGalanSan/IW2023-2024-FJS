@@ -11,5 +11,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Employee findByUsername(String username);
 
     Employee getByUsername(String username);
+    default void updatePassword(Employee employee, String newPassword) {
+        employee.setPassword(newPassword);
+        save(employee);
+    }
 
 }

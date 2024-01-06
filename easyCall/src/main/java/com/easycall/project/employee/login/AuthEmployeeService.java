@@ -4,10 +4,7 @@ package com.easycall.project.employee.login;
 import com.easycall.project.employee.EmployeeRepository;
 import com.easycall.project.employee.Role;
 import com.easycall.project.employee.Employee;
-import com.easycall.project.views.EmployeeComplaintsView;
-import com.easycall.project.views.EmployeeMainView;
-import com.easycall.project.views.MainView;
-import com.easycall.project.views.MainnView;
+import com.easycall.project.views.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.server.VaadinSession;
@@ -64,14 +61,18 @@ public class AuthEmployeeService {
 
         if (rol.equals(Role.MARKETING)) {
             routes.add(new AuthorizedRoute("EmployeeMainView", "EmployeeMainView", EmployeeMainView.class));
+            routes.add(new AuthorizedRoute("EmployeeServiceView", "EmployeeServiceView", EmployeeServiceView.class));
+            routes.add(new AuthorizedRoute("EmployeeDataView", "EmployeeDataView", EmployeeDataView.class));
         }
         if (rol.equals(Role.CUSTOME_SPP)) {
             routes.add(new AuthorizedRoute("EmployeeMainView", "EmployeeMainView", EmployeeMainView.class));
             routes.add(new AuthorizedRoute("EmployeeComplaintsView","EmployeeComplaintsView", EmployeeComplaintsView.class));
+            routes.add(new AuthorizedRoute("EmployeeDataView", "EmployeeDataView", EmployeeDataView.class));
         }
         if (rol.equals(Role.FINANCE)) {
             routes.add(new AuthorizedRoute("EmployeeMainView", "EmployeeMainView", EmployeeMainView.class));
-
+            routes.add(new AuthorizedRoute("EmployeeInvoicesView", "EmployeeInvoicesView", EmployeeInvoicesView.class));
+            routes.add(new AuthorizedRoute("EmployeeDataView", "EmployeeDataView", EmployeeDataView.class));
         }
 
         return routes;

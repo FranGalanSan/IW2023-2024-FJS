@@ -6,12 +6,12 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 
-@PageTitle("Facturas de los Clientes")
-public class EmployeeInvoicesView extends VerticalLayout {
+@PageTitle("Servicios Ofertados")
+public class EmployeeServiceView extends VerticalLayout {
 
-    public EmployeeInvoicesView() {
+    public EmployeeServiceView() {
         // Crear un encabezado con el mensaje deseado
-        H1 header = new H1("Facturas de los Clientes");
+        H1 header = new H1("Servicios Ofertados");
 
         // Añadir el encabezado al layout de la vista
         add(header);
