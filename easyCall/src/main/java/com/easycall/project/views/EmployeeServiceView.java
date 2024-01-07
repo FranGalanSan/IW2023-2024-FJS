@@ -1,24 +1,43 @@
 package com.easycall.project.views;
 
+
+import com.easycall.project.service.Service;
+import com.easycall.project.service.ServiceService;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Autowired;
 
-
-@PageTitle("Servicios Ofertados")
+@PageTitle("Employee Services")
 public class EmployeeServiceView extends VerticalLayout {
 
-    public EmployeeServiceView() {
-        // Crear un encabezado con el mensaje deseado
-        H1 header = new H1("Servicios Ofertados");
+    private final ServiceService serviceService;
+    private Grid<Service> grid;
 
-        // Añadir el encabezado al layout de la vista
+
+    public EmployeeServiceView(@Autowired ServiceService serviceService) {
+        this.serviceService = serviceService;
+
+        setSizeFull();
+        setAlignItems(Alignment.CENTER);
+
+        H1 header = new H1("Servicios Disponibles");
         add(header);
 
-        // Configuraciones adicionales del layout, si son necesarias
-        setAlignItems(Alignment.CENTER);
-        setJustifyContentMode(JustifyContentMode.CENTER);
-        setSizeFull();
+        configureGrid();
+        add(grid);
+
+        updateList();
+    }
+
+    private void configureGrid() {
+        grid = new Grid<>(Service.class);
+        grid.setColumns("serviceId", "nombre", "precio", "descripcion");
+        grid.setSizeFull();
+    }
+
+    private void updateList() {
+        grid.setItems(serviceService.findAllServices());
     }
 }
