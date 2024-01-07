@@ -18,5 +18,9 @@ public class ComplaintService {
         return complaintRepository.findAll();
     }
 
-
+    public void updateComplaintResponse(int id, String response) {
+        Complaint complaint = complaintRepository.findById(id).orElseThrow();
+        complaint.setRespuesta(response);
+        complaintRepository.save(complaint);
+    }
 }
