@@ -1,5 +1,7 @@
 package com.easycall.project.views;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -10,15 +12,12 @@ import com.vaadin.flow.router.Route;
 public class EmployeeMainView extends VerticalLayout {
 
     public EmployeeMainView() {
-        // Crear un encabezado con el mensaje deseado
-        H1 header = new H1("Estás en la vista main de empleados");
+        Button buttonToComplaints = new Button("Ver Quejas", event -> {
+            UI.getCurrent().navigate(EmployeeComplaintsView.class);
+        });
 
-        // Añadir el encabezado al layout de la vista
-        add(header);
-
-        // Configuraciones adicionales del layout, si son necesarias
-        setAlignItems(Alignment.CENTER);
-        setJustifyContentMode(JustifyContentMode.CENTER);
-        setSizeFull();
+        add(buttonToComplaints);
     }
+
+
 }

@@ -3,8 +3,6 @@ package com.easycall.project.employee;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import java.util.Objects;
 
 @Entity
