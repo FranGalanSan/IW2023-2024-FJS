@@ -1,9 +1,9 @@
 package com.easycall.project.complaints;
 
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ComplaintService {
@@ -18,9 +18,19 @@ public class ComplaintService {
         return complaintRepository.findAll();
     }
 
-    public void updateComplaintResponse(int id, String response) {
-        Complaint complaint = complaintRepository.findById(id).orElseThrow();
-        complaint.setRespuesta(response);
-        complaintRepository.save(complaint);
+    public void updateComplaintResponse(int complaintId, String response) {
+        Optional<Complaint> complaintOptional = complaintRepository.findById(complaintId);
+        complaintOptional.ifPresent(complaint -> {
+            complaint.setRespuesta(response);
+            complaintRepository.save(complaint);
+        });
+    }
+
+    public void toggleComplaintOpenStatus(int complaintId, boolean open) {
+        Optional<Complaint> complaintOptional = complaintRepository.findById(complaintId);
+        complaintOptional.ifPresent(complaint -> {
+            complaint.setOpen(open);
+            complaintRepository.save(complaint);
+        });
     }
 }
