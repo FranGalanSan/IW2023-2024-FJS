@@ -10,8 +10,4 @@ public class UserService {
     public List<User> getUser() {
         return userRepository.findAll();
     }
-
-    public void saveUser(User person) {
-        userRepository.save(person);
-    }
 }

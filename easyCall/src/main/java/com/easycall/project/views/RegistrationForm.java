@@ -37,17 +37,14 @@ public class RegistrationForm extends FormLayout {
         password = new PasswordField("Contraseña");
         passwordConfirm = new PasswordField("Confirmar contraseña");
 
-        setRequiredIndicatorVisible(firstName, lastName, email, password,
-                passwordConfirm);
+        setRequiredIndicatorVisible(firstName, lastName, email, password, passwordConfirm);
 
         errorMessageField = new Span();
 
         submitButton = new Button("Confirmar");
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        add(title, firstName, lastName, email, password,
-                passwordConfirm, errorMessageField,
-                submitButton);
+        add(title, firstName, lastName, email, password, passwordConfirm, errorMessageField, submitButton);
 
         // Max width of the Form
         setMaxWidth("500px");

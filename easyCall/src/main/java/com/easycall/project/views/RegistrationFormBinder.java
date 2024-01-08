@@ -1,6 +1,7 @@
 package com.easycall.project.views;
 
 import com.easycall.project.data.user.User;
+import com.easycall.project.data.user.UserRepository;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -11,14 +12,16 @@ import com.vaadin.flow.data.binder.ValueContext;
 public class RegistrationFormBinder {
 
     private RegistrationForm registrationForm;
+    private final UserRepository userRepository;
 
     /**
      * Flag for disabling first run for password validation
      */
     private boolean enablePasswordValidation;
 
-    public RegistrationFormBinder(RegistrationForm registrationForm) {
+    public RegistrationFormBinder(RegistrationForm registrationForm, UserRepository userRepository) {
         this.registrationForm = registrationForm;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -57,6 +60,7 @@ public class RegistrationFormBinder {
                 binder.writeBean(userBean);
 
                 // Typically, you would here call backend to store the bean
+                userRepository.save(userBean);
 
                 // Show success message if everything went well
                 showSuccess(userBean);
