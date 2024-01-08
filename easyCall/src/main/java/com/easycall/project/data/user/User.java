@@ -10,11 +10,10 @@ import java.util.UUID;
 
 @Entity
 public class User {
+
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
-    UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String password;
     @NotEmpty
     private String firstName;
@@ -27,11 +26,11 @@ public class User {
     private LocalDate dateOfBirth;
     private String role;
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
