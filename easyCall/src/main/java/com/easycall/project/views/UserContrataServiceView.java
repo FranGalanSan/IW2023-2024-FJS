@@ -1,24 +1,25 @@
 
 
+
 package com.easycall.project.views;
 
-import com.easycall.project.data.user.User;
-import com.easycall.project.data.user.UserService;
-import com.easycall.project.service.Servicee;
-import com.easycall.project.invoice.InvoiceService;
-import com.easycall.project.service.ServiceService;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
+        import com.easycall.project.data.user.User;
+        import com.easycall.project.data.user.UserService;
+        import com.easycall.project.service.Servicee;
+        import com.easycall.project.invoice.InvoiceService;
+        import com.easycall.project.service.ServiceService;
+        import com.vaadin.flow.component.button.Button;
+        import com.vaadin.flow.component.grid.Grid;
+        import com.vaadin.flow.component.html.H1;
+        import com.vaadin.flow.component.notification.Notification;
+        import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+        import com.vaadin.flow.component.textfield.TextField;
+        import com.vaadin.flow.router.PageTitle;
+        import com.vaadin.flow.router.Route;
+        import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
 @Route(value = "UserContrataServiceView")
 @PageTitle("User Contrata Service")
@@ -51,7 +52,10 @@ public class UserContrataServiceView extends VerticalLayout {
         configureUserServicesGrid();
         configureForm();
 
-        add(serviceGrid, userIdField, submitButton, userIdForServicesField, loadUserServicesButton, userServicesGrid);
+        H1 contractedServicesHeader = new H1("Estos son los servicios que tienes contratados");
+        contractedServicesHeader.getStyle().set("font-size", "1.5em");
+
+        add(serviceGrid, userIdField, submitButton, contractedServicesHeader, userIdForServicesField, loadUserServicesButton, userServicesGrid);
     }
 
     private void configureServiceGrid() {
@@ -74,7 +78,6 @@ public class UserContrataServiceView extends VerticalLayout {
         userIdForServicesField = new TextField("ID del Usuario para Ver Servicios");
         loadUserServicesButton = new Button("Cargar Servicios", event -> loadUserServices());
     }
-
 
     private void createInvoice() {
         try {
@@ -118,4 +121,3 @@ public class UserContrataServiceView extends VerticalLayout {
         }
     }
 }
-
