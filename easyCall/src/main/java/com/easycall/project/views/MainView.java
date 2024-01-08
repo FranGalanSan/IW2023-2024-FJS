@@ -13,7 +13,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 
-@Route("")
+@Route(value="", layout = MainLayout.class)
 @AnonymousAllowed
 public class MainView extends VerticalLayout {
 

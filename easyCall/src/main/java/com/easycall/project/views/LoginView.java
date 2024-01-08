@@ -1,34 +1,46 @@
 package com.easycall.project.views;
 
-import com.easycall.project.data.user.login.AuthUserService;
-import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginForm;
-import com.vaadin.flow.component.login.LoginOverlay;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @Route("login")
-public class LoginView extends Composite<LoginOverlay> {
+@PageTitle("Login | Vaadin CRM")
+@AnonymousAllowed
+public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
-    private final AuthUserService authUserService;
+    private final LoginForm login = new LoginForm();
 
-    public LoginView(AuthUserService authUserService) {
-        this.authUserService = authUserService;
+    public LoginView(){
+        addClassName("login-view");
+        setSizeFull();
+        setAlignItems(Alignment.CENTER);
+        setJustifyContentMode(JustifyContentMode.CENTER);
 
-        LoginOverlay overlay = getContent();
-        overlay.setTitle("EasyCall");
-        overlay.setDescription("");
-        overlay.setOpened(true);
+        login.setAction("login");
 
-        overlay.addLoginListener(loginEvent -> {
-            try {
-                authUserService.authenticate(loginEvent.getUsername(), loginEvent.getPassword());
-                // Redirect to the main view or handle authentication success
-            } catch (AuthUserService.AuthException e) {
-                // Handle authentication failure (e.g., show an error message)
-                overlay.setError(true);
-            }
-        });
+        add(new H1("EasyCall"), login, createRegisterLink());
+    }
+
+    private Anchor createRegisterLink() {
+        Anchor registerLink = new Anchor("register", "¿No tienes cuenta? Regístrate aquí");
+        return registerLink;
+    }
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
+        // inform the user about an authentication error
+        if(beforeEnterEvent.getLocation()
+                .getQueryParameters()
+                .getParameters()
+                .containsKey("error")) {
+            login.setError(true);
+        }
     }
 }

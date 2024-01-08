@@ -1,90 +1,44 @@
 package com.easycall.project.security;
 
+import com.easycall.project.employee.login.LoginView;
+import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
-
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-/*
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private static final String LOGIN_PROCESSING_URL = "/login";
-    private static final String LOGIN_FAILURE_URL = "/login?error";
-    private static final String LOGIN_URL = "/login";
-    private static final String LOGOUT_SUCCESS_URL = "/login";
-
+public class SecurityConfig extends VaadinWebSecurity {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // Vaadin handles CSRF internally
-        http.csrf().disable()
-
-                // Register our CustomRequestCache, which saves unauthorized access attempts, so the user is redirected after login.
-                .requestCache().requestCache(new CustomRequestCache())
-
-                // Restrict access to our application.
-                .and().authorizeRequests()
-
-                // Allow all Vaadin internal requests.
-                .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
-
-                // Allow all requests by logged-in users.
-                .anyRequest().authenticated()
-
-                // Configure the login page.
-                .and().formLogin()
-                .loginPage(LOGIN_URL).permitAll()
-                .loginProcessingUrl(LOGIN_PROCESSING_URL)
-                .failureUrl(LOGIN_FAILURE_URL)
-
-                // Configure logout
-                .and().logout().logoutSuccessUrl(LOGOUT_SUCCESS_URL);
+        http.authorizeHttpRequests(auth ->
+                auth.requestMatchers(
+                        AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll());
+        super.configure(http);
+        setLoginView(http, LoginView.class);
     }
 
     @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("user")
-                .password("{noop}userpass")
+    public UserDetailsService users() {
+        UserDetails user = User.builder()
+                .username("user")
+                // password = password with this hash, don't tell anybody :-)
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
                 .roles("USER")
                 .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
-
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(
-                // Client-side JS
-                "/VAADIN/**",
-
-                // the standard favicon URI
-                "/favicon.ico",
-
-                // the robots exclusion standard
-                "/robots.txt",
-
-                // web application manifest
-                "/manifest.webmanifest",
-                "/sw.js",
-                "/offline.html",
-
-                // icons and images
-                "/icons/**",
-                "/images/**",
-                "/styles/**",
-
-                // (development mode) H2 debugging console
-                "/h2-console/**");
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .roles("USER", "ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }
-        */

@@ -37,8 +37,8 @@ public class LoginView extends Div {
                     } catch (AuthEmployeeService.AuthException e) {
                         Notification.show("Wrong credentials.");
                     }
-                }),
-                new RouterLink("Register", RegisterView.class)
+                })
+                //,new RouterLink("Register", RegisterView.class)
         );
     }
 

@@ -8,20 +8,19 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.data.binder.ValidationResult;
 import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.component.UI;
 
 public class RegistrationFormBinder {
 
     private RegistrationForm registrationForm;
-    private final UserRepository userRepository;
 
     /**
      * Flag for disabling first run for password validation
      */
     private boolean enablePasswordValidation;
 
-    public RegistrationFormBinder(RegistrationForm registrationForm, UserRepository userRepository) {
+    public RegistrationFormBinder(RegistrationForm registrationForm) {
         this.registrationForm = registrationForm;
-        this.userRepository = userRepository;
     }
 
     /**
@@ -60,7 +59,7 @@ public class RegistrationFormBinder {
                 binder.writeBean(userBean);
 
                 // Typically, you would here call backend to store the bean
-                userRepository.save(userBean);
+                // userRepository.save(userBean);
 
                 // Show success message if everything went well
                 showSuccess(userBean);
@@ -112,7 +111,8 @@ public class RegistrationFormBinder {
                 Notification.show("Bienbenido, estás registrado " + userBean.getFirstName());
         notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
-        // Here you'd typically redirect the user to another view
+        UI.getCurrent().navigate(MainView.class);
+
     }
 
 }

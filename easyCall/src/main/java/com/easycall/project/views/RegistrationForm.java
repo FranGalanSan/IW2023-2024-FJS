@@ -74,5 +74,4 @@ public class RegistrationForm extends FormLayout {
     private void setRequiredIndicatorVisible(HasValueAndElement<?, ?>... components) {
         Stream.of(components).forEach(comp -> comp.setRequiredIndicatorVisible(true));
     }
-
 }
