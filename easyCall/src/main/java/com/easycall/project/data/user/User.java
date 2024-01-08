@@ -26,6 +26,14 @@ public class User {
     private LocalDate dateOfBirth;
     private String role;
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public Integer getId() {
         return id;
     }
