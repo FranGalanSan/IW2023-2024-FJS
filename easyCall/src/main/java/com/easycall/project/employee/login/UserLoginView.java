@@ -1,5 +1,7 @@
 package com.easycall.project.employee.login;
 
+import com.easycall.project.data.user.UserService;
+import com.easycall.project.employee.login.AuthUserService;
 //import com.easycall.project.views.RegisterView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -12,12 +14,12 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
-@Route(value = "loginEmployee")
-@PageTitle("LoginEmployee")
 
-public class LoginView extends Div {
+@Route(value = "UserLoginView")
+@PageTitle("UserLoginView")
+public class UserLoginView extends Div{
 
-    public LoginView(AuthEmployeeService authEmployeeService) {
+    public UserLoginView(AuthUserService authUserService) {
         setId("login-view");
         var username = new TextField("Username");
         var password = new PasswordField("Password");
@@ -27,14 +29,16 @@ public class LoginView extends Div {
                 password,
                 new Button("Login", event -> {
                     try {
-                        authEmployeeService.authenticate(username.getValue(), password.getValue());
-                        UI.getCurrent().navigate("EmployeeMainView");
-                    } catch (AuthEmployeeService.AuthException e) {
+                        authUserService.authenticate(username.getValue(), password.getValue());
+                        UI.getCurrent().navigate("UserFacturaView");
+                    } catch (AuthUserService.AuthException e) {
                         Notification.show("Wrong credentials.");
                     }
                 })
                 //new RouterLink("Register", RegisterView.class)
         );
     }
+
+
 
 }

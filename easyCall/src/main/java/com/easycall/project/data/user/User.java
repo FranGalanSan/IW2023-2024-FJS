@@ -1,30 +1,65 @@
 package com.easycall.project.data.user;
 
+import com.easycall.project.employee.Employee;
+import com.easycall.project.employee.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@Table(name = "userr")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty
     private String password;
     @NotEmpty
+    private String username;
+
     private String firstName;
-    @NotEmpty
+
     private String lastName;
     @Email
     private String email;
     private String address;
     private String phone;
     private LocalDate dateOfBirth;
-    private String role;
+    @NotNull
+    private Role rol;
+    public User() {}
+    public User(String username, String password, Role rol) {
+        this.username = username;
+        this.rol = rol;
+        this.password = password;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getLastName() {
         return lastName;
@@ -86,11 +121,11 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getRole() {
-        return role;
+    public Role getRol() {
+        return rol;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRol(Role rol) {
+        this.rol = rol;
     }
 }

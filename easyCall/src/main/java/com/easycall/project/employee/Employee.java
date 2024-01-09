@@ -31,7 +31,7 @@ public class Employee {
       //return this.password == password;
     //}
 
-    // Getters y Setters
+
 
     @Override
     public boolean equals(Object o) {

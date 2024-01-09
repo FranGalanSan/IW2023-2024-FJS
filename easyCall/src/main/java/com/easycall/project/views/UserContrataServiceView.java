@@ -21,7 +21,7 @@ package com.easycall.project.views;
         import java.util.ArrayList;
         import java.util.List;
 
-@Route(value = "UserContrataServiceView")
+
 @PageTitle("User Contrata Service")
 public class UserContrataServiceView extends VerticalLayout {
 
@@ -36,8 +36,8 @@ public class UserContrataServiceView extends VerticalLayout {
     private TextField userIdForServicesField;
     private Button loadUserServicesButton;
 
-    @Autowired
-    public UserContrataServiceView(ServiceService serviceService, UserService userService, InvoiceService invoiceService) {
+
+    public UserContrataServiceView(@Autowired ServiceService serviceService, UserService userService, InvoiceService invoiceService) {
         this.serviceService = serviceService;
         this.userService = userService;
         this.invoiceService = invoiceService;
