@@ -1,5 +1,6 @@
 package com.easycall.project.data.user;
 
+import com.easycall.project.complaints.Complaint;
 import com.easycall.project.employee.Employee;
 import com.easycall.project.employee.Role;
 import jakarta.persistence.*;
@@ -9,6 +10,8 @@ import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -24,6 +27,9 @@ public class User {
     @NotEmpty
     private String username;
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Complaint> complaints = new ArrayList<>();
     private String firstName;
 
     private String lastName;
@@ -51,6 +57,14 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    public List<Complaint> getComplaints() {
+        return complaints;
+    }
+
+    public void setComplaints(List<Complaint> complaints) {
+        this.complaints = complaints;
     }
 
     public String getUsername() {

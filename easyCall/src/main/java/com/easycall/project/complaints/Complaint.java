@@ -1,7 +1,7 @@
 package com.easycall.project.complaints;
 
 
-
+import com.easycall.project.data.user.User;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +11,10 @@ public class Complaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idreclamacion;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(length = 100)
     private String issue;
@@ -22,6 +26,15 @@ public class Complaint {
 
     @Column(length = 400)
     private String respuesta;
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     public int getIdreclamacion() {
         return idreclamacion;
     }

@@ -33,4 +33,8 @@ public class ComplaintService {
             complaintRepository.save(complaint);
         });
     }
+
+    public void createComplaint(Complaint complaint) {
+        complaintRepository.save(complaint);
+    }
 }
