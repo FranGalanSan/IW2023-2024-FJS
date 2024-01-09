@@ -16,6 +16,7 @@ import com.vaadin.flow.server.VaadinSession;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Route(value = "UserContrataServiceView")
 @PageTitle("User Contrata Service")
@@ -26,6 +27,7 @@ public class UserContrataServiceView extends VerticalLayout {
     private final InvoiceService invoiceService;
     private Grid<Servicee> serviceGrid;
     private Button submitButton;
+    private Button unsubscribeButton;
 
     private Grid<Servicee> userServicesGrid;
     private Button loadUserServicesButton;
@@ -48,7 +50,7 @@ public class UserContrataServiceView extends VerticalLayout {
         H1 contractedServicesHeader = new H1("Estos son los servicios que tienes contratados");
         contractedServicesHeader.getStyle().set("font-size", "1.5em");
 
-        add(serviceGrid, submitButton, contractedServicesHeader, loadUserServicesButton, userServicesGrid);
+        add(serviceGrid, submitButton, unsubscribeButton, contractedServicesHeader, loadUserServicesButton, userServicesGrid);
     }
 
     private void configureServiceGrid() {
@@ -67,6 +69,7 @@ public class UserContrataServiceView extends VerticalLayout {
 
     private void configureForm() {
         submitButton = new Button("Contratar Servicios", event -> createInvoice());
+        unsubscribeButton = new Button("Darse de Baja de Servicios", event -> removeServices());
         loadUserServicesButton = new Button("Cargar Servicios", event -> loadUserServices());
     }
 
@@ -109,4 +112,27 @@ public class UserContrataServiceView extends VerticalLayout {
             Notification.show("Error al cargar los servicios: " + e.getMessage());
         }
     }
+
+
+    private void removeServices() {
+        try {
+            User user = getCurrentUser();
+            if (user == null) {
+                Notification.show("Usuario no autenticado.");
+                return;
+            }
+
+            Set<Servicee> selectedServices = userServicesGrid.getSelectedItems();
+            if (selectedServices.isEmpty()) {
+                Notification.show("No se seleccionaron servicios para dar de baja.");
+                return;
+            }
+
+            invoiceService.removeServicesFromInvoice(user, new ArrayList<>(selectedServices));
+            Notification.show("Servicios dados de baja correctamente.");
+        } catch (Exception e) {
+            Notification.show("Error al dar de baja los servicios: " + e.getMessage());
+        }
+    }
+
 }

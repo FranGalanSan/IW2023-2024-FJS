@@ -1,7 +1,10 @@
 package com.easycall.project.service;
 
 
+import com.easycall.project.data.user.User;
 import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @Entity
 @Table(name = "service")
@@ -18,6 +21,20 @@ public class Servicee {
 
     @Column(length = 400)
     private String descripcion;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Servicee)) return false;
+        Servicee servicee = (Servicee) o;
+        return Objects.equals(getServiceId(), servicee.getServiceId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getServiceId());
+    }
+
 
     public Long getServiceId() {
         return serviceId;

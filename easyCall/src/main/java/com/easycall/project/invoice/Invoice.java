@@ -4,6 +4,7 @@ import com.easycall.project.data.user.User;
 import com.easycall.project.service.Servicee;
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Invoice {
@@ -22,6 +23,19 @@ public class Invoice {
             inverseJoinColumns = @JoinColumn(name = "service_id")
     )
     private List<Servicee> services;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Invoice)) return false;
+        Invoice invoice = (Invoice) o;
+        return Objects.equals(getId(), invoice.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
 
     private int costo;

@@ -45,6 +45,28 @@ public class InvoiceService {
             return invoiceRepository.save(newInvoice);
         }
     }
+    public void removeServicesFromInvoice(User user, List<Servicee> servicesToRemove) throws Exception {
+        int currentMonth = LocalDate.now().getMonthValue();
+        int currentYear = LocalDate.now().getYear();
 
-    // Aquí puedes agregar otros métodos relacionados con Invoice si los necesitas
+        Optional<Invoice> existingInvoice = invoiceRepository.findByUserAndMesAndAnno(user, currentMonth, currentYear);
+        if (existingInvoice.isPresent()) {
+            Invoice invoice = existingInvoice.get();
+
+            // Recuperar todos los servicios de la factura
+            List<Servicee> currentServices = new ArrayList<>(invoice.getServices());
+
+            // Quitar los servicios seleccionados para dar de baja
+            currentServices.removeAll(servicesToRemove);
+
+            // Actualizar la factura con la lista modificada
+            invoice.setServices(currentServices);
+            invoiceRepository.save(invoice);
+        } else {
+            throw new Exception("No hay factura existente para el usuario este mes.");
+        }
+    }
+
+
+
 }
