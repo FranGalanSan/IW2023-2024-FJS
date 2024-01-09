@@ -1,4 +1,3 @@
-
 package com.easycall.project.views;
 
 import com.easycall.project.data.user.User;
@@ -11,9 +10,9 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -24,7 +23,6 @@ public class UserFacturaView extends VerticalLayout {
 
     private final UserService userService;
     private Grid<Servicee> userServicesGrid;
-    private TextField userIdForServicesField;
     private Button loadUserServicesButton;
     private Span fiscalDataSpan;
     private Span userDataSpan;
@@ -50,7 +48,7 @@ public class UserFacturaView extends VerticalLayout {
         headerLayout.setFlexGrow(1, fiscalDataSpan, userDataSpan);
         fiscalDataSpan.getStyle().set("margin-right", "auto");
 
-        add(header, headerLayout, userIdForServicesField, loadUserServicesButton, userServicesGrid, totalCostSpan);
+        add(header, headerLayout, loadUserServicesButton, userServicesGrid, totalCostSpan);
     }
 
     private void configureFiscalData() {
@@ -73,7 +71,6 @@ public class UserFacturaView extends VerticalLayout {
     }
 
     private void configureForm() {
-        userIdForServicesField = new TextField("ID del Usuario para Ver Servicios");
         loadUserServicesButton = new Button("Cargar Servicios", event -> loadUserServices());
     }
 
@@ -81,22 +78,28 @@ public class UserFacturaView extends VerticalLayout {
         totalCostSpan = new Span();
     }
 
+    private User getCurrentUser() {
+        return VaadinSession.getCurrent().getAttribute(User.class);
+    }
+
     private void loadUserServices() {
         try {
-            Integer userId = Integer.parseInt(userIdForServicesField.getValue());
-            List<Servicee> userServices = userService.getUserServices(userId);
+            User user = getCurrentUser();
+            if (user == null) {
+                Notification.show("Usuario no autenticado.");
+                return;
+            }
+
+            List<Servicee> userServices = userService.getUserServices(user.getId());
             userServicesGrid.setItems(userServices);
-            updateUserData(userId);
+            updateUserData(user);
             updateTotalCost(userServices);
-        } catch (NumberFormatException e) {
-            Notification.show("ID de usuario inválido.");
         } catch (Exception e) {
             Notification.show("Error al cargar los servicios: " + e.getMessage());
         }
     }
 
-    private void updateUserData(Integer userId) {
-        User user = userService.findUserById(userId);
+    private void updateUserData(User user) {
         if (user != null) {
             String userData = "Nombre: " + user.getFirstName() + " " + user.getLastName() + "\n" +
                     "Email: " + user.getEmail() + "\n" +
