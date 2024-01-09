@@ -12,7 +12,7 @@ public class Complaint {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idreclamacion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 

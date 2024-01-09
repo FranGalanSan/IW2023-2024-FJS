@@ -10,7 +10,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("Employee Complaints")
 public class EmployeeComplaintsView extends VerticalLayout {
@@ -18,6 +17,7 @@ public class EmployeeComplaintsView extends VerticalLayout {
     private final ComplaintService complaintService;
     private Grid<Complaint> grid;
     private TextField idResponseField;
+    private TextField responseTextField;
     private TextField idStatusField;
     private Button submitButton;
     private Button openButton;
@@ -42,7 +42,11 @@ public class EmployeeComplaintsView extends VerticalLayout {
 
     private void configureGrid() {
         grid = new Grid<>(Complaint.class);
-        grid.setColumns("idreclamacion", "issue", "text", "open", "respuesta");
+        grid.addColumn(Complaint::getIdreclamacion).setHeader("ID Reclamación");
+        grid.addColumn(Complaint::getIssue).setHeader("Asunto").setAutoWidth(true);
+        grid.addColumn(Complaint::getText).setHeader("Texto").setAutoWidth(true);
+        grid.addColumn(Complaint::isOpen).setHeader("Abierta");
+        grid.addColumn(Complaint::getRespuesta).setHeader("Respuesta").setAutoWidth(true);
         grid.setSizeFull();
     }
 
@@ -50,7 +54,7 @@ public class EmployeeComplaintsView extends VerticalLayout {
         configureResponseForm();
         configureStatusChangeButtons();
 
-        HorizontalLayout formLayout = new HorizontalLayout(idResponseField, submitButton, idStatusField, openButton, closeButton);
+        HorizontalLayout formLayout = new HorizontalLayout(idResponseField, responseTextField, submitButton, idStatusField, openButton, closeButton);
         formLayout.setAlignItems(Alignment.BASELINE);
 
         return formLayout;
@@ -58,6 +62,7 @@ public class EmployeeComplaintsView extends VerticalLayout {
 
     private void configureResponseForm() {
         idResponseField = new TextField("ID de Queja");
+        responseTextField = new TextField("Respuesta");
         submitButton = new Button("Enviar Respuesta", event -> submitResponse());
     }
 
@@ -69,7 +74,8 @@ public class EmployeeComplaintsView extends VerticalLayout {
 
     private void submitResponse() {
         int complaintId = Integer.parseInt(idResponseField.getValue());
-        complaintService.updateComplaintResponse(complaintId, "Tu respuesta aquí");
+        String response = responseTextField.getValue();
+        complaintService.updateComplaintResponse(complaintId, response);
         updateList();
     }
 
