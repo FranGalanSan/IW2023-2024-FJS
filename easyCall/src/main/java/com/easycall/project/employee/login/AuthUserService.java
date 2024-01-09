@@ -60,7 +60,8 @@ public class AuthUserService {
 
         if (rol.equals(Role.USER)) {
             routes.add(new AuthUserService.AuthorizedRoute("EmployeeMainView", "EmployeeMainView", EmployeeMainView.class));
-        }
+            routes.add(new AuthUserService.AuthorizedRoute("UserContrataServiceView", "UserContrataServiceView", UserContrataServiceView.class));
+        }//realmenteen cada pagina solo se mopstraran datos del usuario actual, de modo que no hay por que esconder las url
 
 
         return routes;
