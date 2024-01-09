@@ -1,5 +1,5 @@
 package com.easycall.project.data.user;
-
+import com.easycall.project.options.Options;
 import com.easycall.project.complaints.Complaint;
 import com.easycall.project.employee.Employee;
 import com.easycall.project.employee.Role;
@@ -32,7 +32,19 @@ public class User {
     private List<Complaint> complaints = new ArrayList<>();
     private String firstName;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "options_id", referencedColumnName = "id")
+    private Options options;
     private String lastName;
+
+    public Options getOptions() {
+        return options;
+    }
+
+    public void setOptions(Options options) {
+        this.options = options;
+    }
+
     @Email
     private String email;
     private String address;
