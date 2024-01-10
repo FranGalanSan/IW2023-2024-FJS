@@ -3,6 +3,7 @@ package com.easycall.project.views;
 import com.easycall.project.complaints.Complaint;
 import com.easycall.project.complaints.ComplaintService;
 import com.easycall.project.data.user.User;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -40,8 +41,9 @@ public class UserCreaComplaintView extends VerticalLayout {
         issueField.setWidth("100%");
         complaintTextField.setWidth("100%");
         complaintTextField.setHeight("200px");
+        Button buttonx = new Button("Volver a Home", event -> UI.getCurrent().navigate("UserMainView"));
 
-        add(header, issueField, complaintTextField, submitButton);
+        add(header, buttonx,issueField, complaintTextField, submitButton);
     }
 
     private void createComplaint() {

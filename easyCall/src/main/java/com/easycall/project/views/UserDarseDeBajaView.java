@@ -4,6 +4,7 @@ import com.easycall.project.data.user.User;
 import com.easycall.project.service.Servicee;
 import com.easycall.project.invoice.InvoiceService;
 import com.easycall.project.data.user.UserService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
@@ -42,8 +43,9 @@ public class UserDarseDeBajaView extends VerticalLayout {
         configureUserServicesGrid();
         configureUnsubscribeButton();
         configureCurrentServicesGrid(); // Configurar el nuevo Grid
+        Button buttonx = new Button("Volver a Home", event -> UI.getCurrent().navigate("UserMainView"));
 
-        add(userServicesGrid, unsubscribeButton, currentServicesGrid); // Añadir el nuevo Grid al layout
+        add( buttonx,userServicesGrid, unsubscribeButton, currentServicesGrid); // Añadir el nuevo Grid al layout
         loadUserServices();
     }
 

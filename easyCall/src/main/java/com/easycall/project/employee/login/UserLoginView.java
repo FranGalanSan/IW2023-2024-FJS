@@ -24,13 +24,13 @@ public class UserLoginView extends Div{
         var username = new TextField("Username");
         var password = new PasswordField("Password");
         add(
-                new H1("Welcome"),
+                new H1("Bienvenido Usuario"),
                 username,
                 password,
                 new Button("Login", event -> {
                     try {
                         authUserService.authenticate(username.getValue(), password.getValue());
-                        UI.getCurrent().navigate("DesgloseView");
+                        UI.getCurrent().navigate("UserMainView");
                     } catch (AuthUserService.AuthException e) {
                         Notification.show("Wrong credentials.");
                     }

@@ -22,7 +22,7 @@ public class LoginView extends Div {
         var username = new TextField("Username");
         var password = new PasswordField("Password");
         add(
-                new H1("Welcome"),
+                new H1("Que tengas una buena jornada laboral"),
                 username,
                 password,
                 new Button("Login", event -> {

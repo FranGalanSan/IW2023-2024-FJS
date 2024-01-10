@@ -59,8 +59,9 @@ public class UserFacturaView extends VerticalLayout {
         headerLayout.add(fiscalDataSpan, userDataSpan);
         headerLayout.setFlexGrow(1, fiscalDataSpan, userDataSpan);
         fiscalDataSpan.getStyle().set("margin-right", "auto");
+        Button buttonx = new Button("Volver a Home", event -> UI.getCurrent().navigate("UserMainView"));
 
-        add(header, headerLayout, loadUserServicesButton, userServicesGrid, totalCostSpan, exportButton);
+        add(header, headerLayout, loadUserServicesButton, userServicesGrid, totalCostSpan, exportButton,buttonx);
     }
 
     private void configureFiscalData() {

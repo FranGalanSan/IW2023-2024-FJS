@@ -5,6 +5,7 @@ import com.easycall.project.data.user.UserService;
 import com.easycall.project.service.Servicee;
 import com.easycall.project.invoice.InvoiceService;
 import com.easycall.project.service.ServiceService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
@@ -49,8 +50,9 @@ public class UserContrataServiceView extends VerticalLayout {
 
         H1 contractedServicesHeader = new H1("Estos son los servicios que tienes contratados");
         contractedServicesHeader.getStyle().set("font-size", "1.5em");
+        Button buttonx = new Button("Volver a Home", event -> UI.getCurrent().navigate("UserMainView"));
 
-        add(serviceGrid, submitButton, contractedServicesHeader, loadUserServicesButton, userServicesGrid);
+        add(buttonx,serviceGrid, submitButton, contractedServicesHeader, loadUserServicesButton, userServicesGrid);
     }
 
     private void configureServiceGrid() {

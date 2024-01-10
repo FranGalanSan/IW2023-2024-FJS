@@ -3,6 +3,7 @@ package com.easycall.project.views;
 import com.easycall.project.options.Options;
 import com.easycall.project.options.OptionsService;
 import com.easycall.project.data.user.User;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
@@ -61,12 +62,13 @@ public class OptionsView extends VerticalLayout {
         addButton = new Button("Add Number", e -> addNumber());
         blockedNumbersList = new ListBox<>();
         removeButton = new Button("Remove Selected", e -> removeNumber());
+        Button buttonx = new Button("Volver a Home", event -> UI.getCurrent().navigate("UserMainView"));
 
         HorizontalLayout roamingLayout = new HorizontalLayout(roamingOnButton, roamingOffButton, roamingStatus);
         HorizontalLayout block905Layout = new HorizontalLayout(block905OnButton, block905OffButton, block905Status);
         HorizontalLayout blockNumberLayout = new HorizontalLayout(addNumberField, addButton, blockedNumbersList, removeButton);
 
-        add(roamingLayout, block905Layout, blockNumberLayout);
+        add(buttonx,roamingLayout, block905Layout, blockNumberLayout);
     }
 
     private void bindDataToFields() {

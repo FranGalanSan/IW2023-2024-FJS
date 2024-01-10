@@ -40,7 +40,11 @@ public class UserDatosView extends VerticalLayout {
     }
 
     private void initializeView() {
-        add(new H1("Bienvenido! Estos Son Tus Datos De Usuario"));
+        Button buttonx = new Button("Volver a Home", event -> UI.getCurrent().navigate("UserMainView"));
+        Button buttonx1=new Button("SMS", event -> UI.getCurrent().navigate("UserSmsView"));
+        Button buttonx2=new Button("Llamadas", event -> UI.getCurrent().navigate("UserCallsDesglose"));
+
+        add(new H1("Bienvenido! Estos Son Tus Datos De Usuario"),buttonx,buttonx1,buttonx2);
         displayUserData();
         setupEditForm();
         setupUsoDatosFields();
