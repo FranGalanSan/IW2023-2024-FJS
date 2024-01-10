@@ -1,14 +1,19 @@
 package com.easycall.project.data.user;
+import com.easycall.project.llamadas.Llamada;
 import com.easycall.project.options.Options;
 import com.easycall.project.complaints.Complaint;
 import com.easycall.project.employee.Employee;
 import com.easycall.project.employee.Role;
+import com.easycall.project.sms.SMS;
+import com.easycall.project.usoDatos.UsoDatos;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
-
+import com.easycall.project.usoDatos.UsoDatos;
+import com.easycall.project.sms.SMS;
+import com.easycall.project.llamadas.Llamada;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,14 @@ public class User {
     @NotEmpty
     private String username;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Llamada llamada;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SMS> smsList = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private UsoDatos usoDatos;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Complaint> complaints = new ArrayList<>();
@@ -69,6 +82,21 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    public void setLlamada(Llamada llamada) {
+        this.llamada = llamada;
+        llamada.setUser(this);
+    }
+
+    public void addSMS(SMS sms) {
+        smsList.add(sms);
+        sms.setUser(this);
+    }
+
+    public void setUsoDatos(UsoDatos usoDatos) {
+        this.usoDatos = usoDatos;
+        usoDatos.setUser(this);
     }
 
     public List<Complaint> getComplaints() {
