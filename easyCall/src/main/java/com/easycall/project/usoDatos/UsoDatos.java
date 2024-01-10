@@ -1,8 +1,12 @@
 package com.easycall.project.usoDatos;
 import com.easycall.project.data.user.User;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import jakarta.persistence.FetchType;
 import java.util.List;
-
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import jakarta.persistence.ElementCollection;
 @Entity
 public class UsoDatos {
     @Id
@@ -13,8 +17,9 @@ public class UsoDatos {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ElementCollection
-    private List<Integer> datosDiarios; // Lista de 31 elementos para los datos consumidos cada día
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
+    private List<Integer> datosDiarios;// Lista de 31 elementos para los datos consumidos cada día
 
     public Integer getId() {
         return id;
