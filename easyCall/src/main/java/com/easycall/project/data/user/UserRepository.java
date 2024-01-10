@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         user.setPassword(newPassword);
         save(user);
     }
+
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
 }
