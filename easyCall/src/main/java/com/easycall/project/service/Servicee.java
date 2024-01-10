@@ -35,6 +35,14 @@ public class Servicee {
         return Objects.hash(getServiceId());
     }
 
+    @Override
+    public String toString() {
+        return
+                nombre +
+                " Precio  " + precio +
+                " " + descripcion;
+    }
+
 
     public Long getServiceId() {
         return serviceId;

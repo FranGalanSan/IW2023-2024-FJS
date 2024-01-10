@@ -1,0 +1,11 @@
+Escuela Superior de Ingeniería – Universidad de Cádiz
+Campus Universitario de Puerto Real
+Avda. Universidad de Cádiz, nº 10
+CP 11519 – Puerto Real, Cádiz
+Nombre: Juan Pérez
+Email: usuario1@example.com
+Teléfono: 555-1234
+Servicio de Cable precio unitario 45 Paquete de televisión por cable con más de 100 canales
+Servicio de Telefonía Móvil precio unitario 20 Plan de llamadas y datos móviles ilimitados
+Servicio de Electricidad precio unitario 50 Suministro eléctrico para el hogar o la oficina
+Coste total: 115.0 €
