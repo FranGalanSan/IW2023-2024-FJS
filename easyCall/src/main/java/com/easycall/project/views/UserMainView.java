@@ -5,6 +5,7 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+@Route(value = "UserMainView")
 @PageTitle("UserMainViewW")
 public class UserMainView extends AppLayout{
     public UserMainView() {
