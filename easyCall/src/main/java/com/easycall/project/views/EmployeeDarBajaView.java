@@ -8,6 +8,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
@@ -27,6 +28,7 @@ public class EmployeeDarBajaView extends VerticalLayout {
     private Grid<Servicee> userServicesGrid;
     private Grid<Servicee> currentServicesGrid;
     private Button unsubscribeButton;
+    private Button loadUserServicesButton;
     private Button loadCurrentServicesButton;
     private TextField userServicesUserIdField;
     private TextField currentServicesUserIdField;
@@ -46,14 +48,15 @@ public class EmployeeDarBajaView extends VerticalLayout {
         configureUserServicesGrid();
         configureCurrentServicesGrid();
 
-        add(userServicesUserIdField, userServicesGrid, unsubscribeButton,
-                currentServicesUserIdField, loadCurrentServicesButton, currentServicesGrid);
+        add(new HorizontalLayout(userServicesUserIdField, loadUserServicesButton), userServicesGrid, unsubscribeButton,
+                new HorizontalLayout(currentServicesUserIdField, loadCurrentServicesButton), currentServicesGrid);
     }
 
     private void configureUserServicesControls() {
         userServicesUserIdField = new TextField("ID de Usuario para User Services");
         userServicesUserIdField.setPlaceholder("Introduce el ID del usuario");
-        userServicesUserIdField.addValueChangeListener(e -> loadUserServices());
+
+        loadUserServicesButton = new Button("Cargar Servicios de Usuario", e -> loadUserServices());
 
         unsubscribeButton = new Button("Darse de Baja en User Services", e -> unsubscribeServices());
     }
