@@ -27,7 +27,7 @@ public class UserContrataServiceView extends VerticalLayout {
     private final InvoiceService invoiceService;
     private Grid<Servicee> serviceGrid;
     private Button submitButton;
-    private Button unsubscribeButton;
+
 
     private Grid<Servicee> userServicesGrid;
     private Button loadUserServicesButton;
@@ -50,7 +50,7 @@ public class UserContrataServiceView extends VerticalLayout {
         H1 contractedServicesHeader = new H1("Estos son los servicios que tienes contratados");
         contractedServicesHeader.getStyle().set("font-size", "1.5em");
 
-        add(serviceGrid, submitButton, unsubscribeButton, contractedServicesHeader, loadUserServicesButton, userServicesGrid);
+        add(serviceGrid, submitButton, contractedServicesHeader, loadUserServicesButton, userServicesGrid);
     }
 
     private void configureServiceGrid() {
@@ -69,7 +69,6 @@ public class UserContrataServiceView extends VerticalLayout {
 
     private void configureForm() {
         submitButton = new Button("Contratar Servicios", event -> createInvoice());
-        unsubscribeButton = new Button("Darse de Baja de Servicios", event -> removeServices());
         loadUserServicesButton = new Button("Cargar Servicios", event -> loadUserServices());
     }
 
