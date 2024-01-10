@@ -44,4 +44,20 @@ public class UserService {
         return userRepository.existsByUsername(username) || userRepository.existsByEmail(email);
     }
 
+    public boolean updateUserData(User user, String firstName, String lastName, String address, String phone) {
+
+        if (userRepository.existsByEmailAndIdNot(user.getEmail(), user.getId()) ||
+                userRepository.existsByPhoneAndIdNot(phone, user.getId())) {
+            return false;
+        }
+
+
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setAddress(address);
+        user.setPhone(phone);
+        userRepository.save(user);
+        return true;
+    }
+
 }

@@ -8,11 +8,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUsername(String username);
     User getByUsername(String username);
 
-    default void updatePassword(User user, String newPassword) {
-        user.setPassword(newPassword);
-        save(user);
-    }
-
+    boolean existsByEmailAndIdNot(String email, Integer id);
+    boolean existsByPhoneAndIdNot(String phone, Integer id);
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
 }
