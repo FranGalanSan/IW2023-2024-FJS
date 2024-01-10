@@ -14,7 +14,15 @@ public class SMS {
     private User user;
 
     private String contenidoSMS;
+    private String numeroDestinatario;
 
+    public String getNumeroDestinatario() {
+        return numeroDestinatario;
+    }
+
+    public void setNumeroDestinatario(String numeroDestinatario) {
+        this.numeroDestinatario = numeroDestinatario;
+    }
     public Integer getId() {
         return id;
     }

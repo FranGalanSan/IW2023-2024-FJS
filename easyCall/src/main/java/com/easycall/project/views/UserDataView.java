@@ -1,12 +1,13 @@
 
 
-package com.easycall.project.views;
+        package com.easycall.project.views;
 
         import com.easycall.project.data.user.User;
         import com.easycall.project.llamadas.Llamada;
         import com.easycall.project.llamadas.LlamadaService;
         import com.vaadin.flow.component.button.Button;
         import com.vaadin.flow.component.grid.Grid;
+        import com.vaadin.flow.component.html.H1;
         import com.vaadin.flow.component.html.Span;
         import com.vaadin.flow.component.notification.Notification;
         import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -26,6 +27,7 @@ public class UserDataView extends VerticalLayout {
     private Grid<Llamada> gridLlamadas;
     private TextField addNumberField;
     private Button addButton;
+    private Span llamadasEsteMes;
 
     public UserDataView(LlamadaService llamadaService) {
         this.llamadaService = llamadaService;
@@ -36,6 +38,7 @@ public class UserDataView extends VerticalLayout {
             displayUserData(currentUser);
             addLlamadaSection(currentUser);
             initializeGrid(currentUser);
+            addLlamadasEsteMes(currentUser);
         } else {
             add(new Span("Usuario no encontrado o sesión no iniciada."));
         }
@@ -44,6 +47,8 @@ public class UserDataView extends VerticalLayout {
     private User getCurrentUser() {
         return VaadinSession.getCurrent().getAttribute(User.class);
     }
+
+
 
     private void displayUserData(User user) {
         // Componentes para mostrar los datos del usuario
@@ -56,10 +61,11 @@ public class UserDataView extends VerticalLayout {
         add(new Span("Rol: " + user.getRol().toString()));
     }
 
+
     private void addLlamadaSection(User user) {
         addNumberField = new TextField("Número de teléfono");
         addNumberField.setPlaceholder("Ingresa un número");
-        addNumberField.setPattern("[0-9]{3,15}");  // Permite solo números con longitud de 3 a 15 caracteres
+        addNumberField.setPattern("[0-9]{3,15}");
         addNumberField.setErrorMessage("Número inválido");
 
         addButton = new Button("Añadir número", e -> addNumber(user));
@@ -72,6 +78,7 @@ public class UserDataView extends VerticalLayout {
             try {
                 llamadaService.addNumeroALlamada(user, addNumberField.getValue());
                 updateGrid(user);
+                updateLlamadasEsteMes(user); // Actualiza el contador de llamadas
                 Notification.show("Número añadido: " + addNumberField.getValue());
             } catch (Exception e) {
                 Notification.show("Error al añadir número: " + e.getMessage());
@@ -80,7 +87,10 @@ public class UserDataView extends VerticalLayout {
             Notification.show("Número inválido o vacío");
         }
     }
-
+    private void updateLlamadasEsteMes(User user) {
+        int totalLlamadas = llamadaService.contarLlamadasMesActual(user);
+        llamadasEsteMes.setText("Llamadas este mes: " + totalLlamadas);
+    }
     private void initializeGrid(User user) {
         gridLlamadas = new Grid<>(Llamada.class, false);
         gridLlamadas.addColumn(llamada -> String.join(", ", llamada.getNumeros()))
@@ -92,5 +102,10 @@ public class UserDataView extends VerticalLayout {
     private void updateGrid(User user) {
         List<Llamada> llamadas = llamadaService.getLlamadasPorUsuario(user);
         gridLlamadas.setItems(llamadas);
+    }
+
+    private void addLlamadasEsteMes(User user) {
+        llamadasEsteMes = new Span("Llamadas este mes: " + llamadaService.contarLlamadasMesActual(user));
+        add(llamadasEsteMes);
     }
 }

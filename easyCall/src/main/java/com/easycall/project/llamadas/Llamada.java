@@ -1,6 +1,8 @@
 package com.easycall.project.llamadas;
 import com.easycall.project.data.user.User;
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -12,6 +14,15 @@ public class Llamada {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+    private LocalDateTime fechaHora;
+
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(LocalDateTime fechaHora) {
+        this.fechaHora = fechaHora;
+    }
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> numeros;
