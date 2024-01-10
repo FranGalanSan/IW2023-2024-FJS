@@ -30,7 +30,7 @@ public class UserLoginView extends Div{
                 new Button("Login", event -> {
                     try {
                         authUserService.authenticate(username.getValue(), password.getValue());
-                        UI.getCurrent().navigate("UserFacturaView");
+                        UI.getCurrent().navigate("UserDataView");
                     } catch (AuthUserService.AuthException e) {
                         Notification.show("Wrong credentials.");
                     }
