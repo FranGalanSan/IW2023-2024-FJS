@@ -50,7 +50,7 @@ public class AuthUserService {
 
             // Si la vista no está registrada, configurar la ruta
             if (!isRouteRegistered) {
-                routeConfiguration.setRoute(route.route, route.view, UserMainView.class);
+                routeConfiguration.setRoute(route.route, route.view, MainnView.class);
             }
         });
     }
@@ -59,9 +59,9 @@ public class AuthUserService {
         var routes = new ArrayList<AuthUserService.AuthorizedRoute>();
 
         if (rol.equals(Role.USER)) {
-            routes.add(new AuthUserService.AuthorizedRoute("EmployeeMainView", "EmployeeMainView", EmployeeMainView.class));
-            routes.add(new AuthUserService.AuthorizedRoute("UserContrataServiceView", "UserContrataServiceView", UserContrataServiceView.class));
-        }//realmenteen cada pagina solo se mopstraran datos del usuario actual, de modo que no hay por que esconder las url
+            routes.add(new AuthUserService.AuthorizedRoute("UserSmsView", "UserSmsView", UserSmsView.class));
+
+        }//No importa que no esten ocultas, los usuarios solo pueden ver lo correspondiente a su id, asi que como mucho veran una pagina en blanco
 
 
         return routes;

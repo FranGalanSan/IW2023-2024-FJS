@@ -27,7 +27,7 @@ public class UserCreaComplaintView extends VerticalLayout {
     public UserCreaComplaintView(ComplaintService complaintService) {
         this.complaintService = complaintService;
 
-        // Configuración del layout
+
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
@@ -37,7 +37,7 @@ public class UserCreaComplaintView extends VerticalLayout {
         complaintTextField = new TextArea("Descripción de la Queja");
         submitButton = new Button("Enviar Queja", event -> createComplaint());
 
-        // Ajustar el tamaño de los campos de texto
+
         issueField.setWidth("100%");
         complaintTextField.setWidth("100%");
         complaintTextField.setHeight("200px");
@@ -57,10 +57,10 @@ public class UserCreaComplaintView extends VerticalLayout {
         complaint.setIssue(issueField.getValue());
         complaint.setText(complaintTextField.getValue());
         complaint.setOpen(true);
-        complaint.setUser(currentUser); // Asignar el usuario actual a la queja
+        complaint.setUser(currentUser);
 
         try {
-            complaintService.createComplaint(complaint); // Asegúrate de tener este método en tu ComplaintService
+            complaintService.createComplaint(complaint);
             Notification.show("Queja enviada con éxito.");
         } catch (Exception e) {
             Notification.show("Error al enviar la queja: " + e.getMessage());

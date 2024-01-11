@@ -33,4 +33,14 @@ public class ServiceService {
             serviceRepository.save(existingService);
         }
     }
+
+
+    public Servicee saveService(Servicee service) {
+        return serviceRepository.save(service);
+    }
+
+
+    public void deleteService(Long serviceId) {
+        serviceRepository.deleteById(serviceId);
+    }
 }

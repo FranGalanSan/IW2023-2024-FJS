@@ -1,6 +1,5 @@
 package com.easycall.project.views;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;

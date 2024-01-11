@@ -63,6 +63,7 @@ public class AuthEmployeeService {
             routes.add(new AuthorizedRoute("EmployeeMainView", "EmployeeMainView", EmployeeMainView.class));
             routes.add(new AuthorizedRoute("EmployeeServiceView", "EmployeeServiceView", EmployeeServiceView.class));
             routes.add(new AuthorizedRoute("EmployeeDataView", "EmployeeDataView", EmployeeDataView.class));
+            routes.add(new AuthorizedRoute("EmployeeManageServiceView", "EmployeeManageServiceView", EmployeeManageServiceView.class));
         }
         if (rol.equals(Role.CUSTOME_SPP)) {
             routes.add(new AuthorizedRoute("EmployeeMainView", "EmployeeMainView", EmployeeMainView.class));
@@ -72,7 +73,7 @@ public class AuthEmployeeService {
         }
         if (rol.equals(Role.FINANCE)) {
             routes.add(new AuthorizedRoute("EmployeeMainView", "EmployeeMainView", EmployeeMainView.class));
-            routes.add(new AuthorizedRoute("EmployeeInvoicesView", "EmployeeInvoicesView", EmployeeInvoicesView.class));
+            routes.add(new AuthorizedRoute("EmployeeEmiteFacturaView", "EmployeeEmiteFacturaView", EmployeeEmiteFacturaView.class));
             routes.add(new AuthorizedRoute("EmployeeDataView", "EmployeeDataView", EmployeeDataView.class));
             routes.add(new AuthorizedRoute("EmployeeDarBajaView", "EmployeeDarBajaView", EmployeeDarBajaView.class));
         }
@@ -80,3 +81,4 @@ public class AuthEmployeeService {
         return routes;
     }
 }
+

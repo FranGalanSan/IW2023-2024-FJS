@@ -4,6 +4,7 @@ import com.easycall.project.data.user.User;
 import com.easycall.project.service.Servicee;
 import com.easycall.project.invoice.InvoiceService;
 import com.easycall.project.data.user.UserService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
@@ -13,13 +14,14 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-@Route(value = "EmployeeDarBajaView")
+
 @PageTitle("Dar de Baja Servicios de Empleado")
 public class EmployeeDarBajaView extends VerticalLayout {
 
@@ -33,7 +35,7 @@ public class EmployeeDarBajaView extends VerticalLayout {
     private TextField userServicesUserIdField;
     private TextField currentServicesUserIdField;
 
-    public EmployeeDarBajaView(InvoiceService invoiceService, UserService userService) {
+    public EmployeeDarBajaView(@Autowired InvoiceService invoiceService, @Autowired UserService userService) {
         this.invoiceService = invoiceService;
         this.userService = userService;
 
@@ -47,8 +49,10 @@ public class EmployeeDarBajaView extends VerticalLayout {
         configureCurrentServicesControls();
         configureUserServicesGrid();
         configureCurrentServicesGrid();
-
-        add(new HorizontalLayout(userServicesUserIdField, loadUserServicesButton), userServicesGrid, unsubscribeButton,
+        Button button = new Button("Volver a Home", event -> {
+            UI.getCurrent().navigate(EmployeeMainView.class);
+        });
+        add(button,new HorizontalLayout(userServicesUserIdField, loadUserServicesButton), userServicesGrid, unsubscribeButton,
                 new HorizontalLayout(currentServicesUserIdField, loadCurrentServicesButton), currentServicesGrid);
     }
 

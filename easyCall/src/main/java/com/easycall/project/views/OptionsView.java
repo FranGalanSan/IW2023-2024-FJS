@@ -15,6 +15,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 
+import java.util.ArrayList;
+
 @Route("OptionsView")
 @PageTitle("User Options")
 public class OptionsView extends VerticalLayout {
@@ -74,6 +76,9 @@ public class OptionsView extends VerticalLayout {
     private void bindDataToFields() {
         updateRoamingStatus();
         updateBlock905Status();
+        if (userOptions.getNumerosBloqueados() == null) {
+            userOptions.setNumerosBloqueados(new ArrayList<>());
+        }
         blockedNumbersList.setItems(userOptions.getNumerosBloqueados());
     }
 

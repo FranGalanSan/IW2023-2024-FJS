@@ -33,35 +33,20 @@ public class EmployeeDataView extends VerticalLayout {
             HorizontalLayout layout = new HorizontalLayout();
             layout.setSizeFull();
 
-            VerticalLayout passwordLayout = createPasswordChangeSection(currentEmployee, "lightblue");
-            VerticalLayout serviceLayout = createSectionWithHeader("Gestionar Servicios Ofertados", "lightblue", () -> UI.getCurrent().navigate("EmployeeServiceView"));
-            VerticalLayout complaintLayout = createSectionWithHeader("Gestionar Quejas De Los Clientes", "lightblue", () -> UI.getCurrent().navigate("EmployeeComplaintsView"));
-            VerticalLayout invoicesLayout = createSectionWithHeader("Gestionar Recibos De Los Clientes", "lightblue", () -> UI.getCurrent().navigate("EmployeeInvoicesView"));
-
-            layout.add(passwordLayout, serviceLayout, complaintLayout, invoicesLayout);
+            VerticalLayout passwordLayout = createPasswordChangeSection(currentEmployee);
+            layout.add(passwordLayout);
             add(layout);
+
+            Button button = new Button("Volver a Home", event -> {
+                UI.getCurrent().navigate(EmployeeMainView.class);
+            });
+            add(button);
         } else {
             add(new Span("No hay datos del empleado disponibles."));
         }
     }
 
-    private VerticalLayout createSectionWithHeader(String titleText, String backgroundColor, Runnable onClickAction) {
-        VerticalLayout layout = new VerticalLayout();
-        layout.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
-
-        H2 header = new H2(titleText);
-        header.getStyle().set("text-align", "center").set("font-weight", "bold");
-
-        Button button = new Button("Acceder", event -> onClickAction.run());
-
-        layout.add(header, button);
-        layout.getStyle().set("background-color", backgroundColor);
-        layout.setWidth("500px"); // Fijar ancho
-        layout.setHeight("500px"); // Fijar altura
-        return layout;
-    }
-
-    private VerticalLayout createPasswordChangeSection(Employee currentEmployee, String backgroundColor) {
+    private VerticalLayout createPasswordChangeSection(Employee currentEmployee) {
         VerticalLayout passwordLayout = new VerticalLayout();
         passwordLayout.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
 
@@ -81,9 +66,8 @@ public class EmployeeDataView extends VerticalLayout {
         });
 
         passwordLayout.add(changePasswordTitle, oldPasswordField, newPasswordField, changePasswordButton);
-        passwordLayout.getStyle().set("background-color", backgroundColor);
-        passwordLayout.setWidth("500px"); // Fijar ancho
-        passwordLayout.setHeight("500px"); // Fijar altura
+        passwordLayout.setWidth("500px");
+        passwordLayout.setHeight("500px");
         return passwordLayout;
     }
 }

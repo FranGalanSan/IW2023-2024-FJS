@@ -2,6 +2,7 @@ package com.easycall.project.views;
 
 import com.easycall.project.complaints.Complaint;
 import com.easycall.project.complaints.ComplaintService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
@@ -29,8 +30,11 @@ public class EmployeeComplaintsView extends VerticalLayout {
         setSizeFull();
         setAlignItems(Alignment.CENTER);
 
-        H1 header = new H1("Solicitudes de los Clientes");
-        add(header);
+        H1 header = new H1("Quejas y Reclamaciones");
+        Button button = new Button("Volver a Home", event -> {
+            UI.getCurrent().navigate(EmployeeMainView.class);
+        });
+        add(header,button);
 
         configureGrid();
         configureResponseForm();

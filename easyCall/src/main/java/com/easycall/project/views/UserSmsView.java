@@ -6,14 +6,16 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.component.UI;
 import com.easycall.project.data.user.User;
 import com.easycall.project.sms.SMS;
 import com.easycall.project.sms.SMSService;
-
-@Route("UserSmsView")
+import org.springframework.beans.factory.annotation.Autowired;
+@Route(value = "UserSmsView")
+@PageTitle("UserSmsView")
 public class UserSmsView extends VerticalLayout {
 
     private final SMSService smsService;
@@ -23,7 +25,7 @@ public class UserSmsView extends VerticalLayout {
     private Grid<SMS> gridSMSEnviados;
     private Grid<SMS> gridSMSRecibidos;
 
-    public UserSmsView(SMSService smsService) {
+    public UserSmsView(@Autowired SMSService smsService) {
         this.smsService = smsService;
         User currentUser = getCurrentUser();
 

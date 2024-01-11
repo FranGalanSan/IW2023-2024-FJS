@@ -31,7 +31,7 @@ public class CreateOptionsView extends VerticalLayout {
 
         if (currentUser != null) {
             Options options = new Options();
-            // Set default values for Options here
+
             optionsService.createOrUpdateOptions(currentUser, options);
         } else {
 
